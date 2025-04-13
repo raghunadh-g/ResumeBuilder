@@ -105,242 +105,85 @@ function exportToPdf() {
 function exportToDocx() {
     // Get the resume preview iframe
     const iframe = document.getElementById('resume-preview');
-    
+
     // Check if iframe is loaded
     if (!iframe || !iframe.contentWindow || !iframe.contentWindow.document.body) {
         alert('Please wait for the resume preview to load completely before exporting.');
         return;
     }
-    
+
     // Show loading indicator
     showLoadingIndicator('Generating DOCX...');
-    
+
     try {
         // Get the resume content
         const resumeContent = iframe.contentWindow.document.body.querySelector('.resume-template');
-        
+
         if (!resumeContent) {
             hideLoadingIndicator();
             alert('No resume content found. Please make sure you have selected a template and filled in some information.');
             return;
         }
-        
-        // Get the resume data
-        const resumeData = collectResumeData();
-        
-        // Check if docx library is available
-        if (!window.docx) {
-            console.error('docx library not found');
-            hideLoadingIndicator();
-            alert('The document generation library is not loaded. Please refresh the page and try again.');
-            return;
-        }
-        
-        // Create a new Document using the docx library
-        const doc = new window.docx.Document({
-            sections: [{
-                properties: {},
-                children: generateDocxContent(resumeData)
-            }]
+
+        //Get the styles applied to the resume (style + link elements)
+        const styles = iframe.contentWindow.document.head.querySelectorAll('style');
+        let collectedStyles = '';
+
+        styles.forEach(style => {
+            collectedStyles += style.outerHTML;
         });
-        
-        // Use the docx library to create a blob
-        window.docx.Packer.toBlob(doc).then(blob => {
-            // Create a download link
-            const downloadLink = document.createElement('a');
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = `${resumeData.firstName || 'Resume'}_${resumeData.lastName || ''}.docx`.trim();
-            
-            // Append the link to the body
-            document.body.appendChild(downloadLink);
-            
-            // Hide loading indicator
-            hideLoadingIndicator();
-            
-            // Click the link to download the file
-            downloadLink.click();
-            
-            // Remove the link
-            document.body.removeChild(downloadLink);
-        }).catch(error => {
-            console.error('Error creating DOCX blob:', error);
-            hideLoadingIndicator();
-            alert('There was an error generating the DOCX file. Please try again.');
+
+        fetch('styles.css')
+        .then(res => res.text())
+        .then(cssText => {
+            const styleTag = `<style>${cssText}</style>`;
+            collectedStyles += styleTag;
         });
+
+        fetch('templates.css')
+        .then(res => res.text())
+        .then(cssText => {
+            const styleTag = `<style>${cssText}</style>`;
+            collectedStyles += styleTag;
+        });
+
+        const wordHTML = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office" 
+          xmlns:w="urn:schemas-microsoft-com:office:word" 
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+        <meta charset="utf-8">
+        <title>Resume</title>
+        ${collectedStyles}
+    </head>
+    <body>
+        ${resumeContent.outerHTML}
+    </body>
+    </html>
+    `;
+
+    //Create a Blob object (MIME type: application/msword)
+    const blob = new Blob(['\ufeff', wordHTML], {
+        type: 'application/msword'
+    });
+
+    //Create a temporary download link
+    const downloadLink = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    downloadLink.download = 'Resume.doc'; // Filename for the download
+    document.body.appendChild(downloadLink);
+    downloadLink.click(); // Trigger the download
+    document.body.removeChild(downloadLink); // Cleanup
+
+    // Optional: Release the object URL
+    URL.revokeObjectURL(url);
+
     } catch (error) {
         console.error('DOCX generation error:', error);
         hideLoadingIndicator();
         alert('An error occurred while generating the DOCX: ' + error.message);
     }
-}
-
-/**
- * Create DOCX content from resume data
- */
-function createDocxContent(resumeData) {
-    // Use the docx library to create a proper DOCX file
-    const { Document, Paragraph, TextRun, HeadingLevel, AlignmentType } = window.docx;
-    
-    // Create a new Document
-    const doc = new Document({
-        sections: [{
-            properties: {},
-            children: generateDocxContent(resumeData)
-        }]
-    });
-    
-    return doc;
-}
-
-/**
- * Generate DOCX content from resume data
- * @param {Object} data - The resume data
- * @returns {Array} - Array of DOCX content elements
- */
-function generateDocxContent(data) {
-    const { Document, Paragraph, TextRun, HeadingLevel, AlignmentType } = window.docx;
-    
-    const content = [];
-    
-    // Add name and title
-    content.push(
-        new Paragraph({
-            text: `${data.firstName || ''} ${data.lastName || ''}`,
-            heading: HeadingLevel.HEADING_1,
-            alignment: AlignmentType.CENTER
-        })
-    );
-    
-    if (data.professionalTitle) {
-        content.push(
-            new Paragraph({
-                text: data.professionalTitle,
-                alignment: AlignmentType.CENTER
-            })
-        );
-    }
-    
-    // Add contact info
-    const contactInfo = [];
-    if (data.email) contactInfo.push(data.email);
-    if (data.phone) contactInfo.push(data.phone);
-    if (data.city) {
-        const location = data.city + (data.state ? ', ' + data.state : '');
-        contactInfo.push(location);
-    }
-    
-    content.push(
-        new Paragraph({
-            text: contactInfo.join(' | '),
-            alignment: AlignmentType.CENTER
-        })
-    );
-    
-    // Add summary
-    if (data.summary) {
-        content.push(
-            new Paragraph({
-                text: 'Professional Summary',
-                heading: HeadingLevel.HEADING_2
-            }),
-            new Paragraph({
-                text: data.summary
-            })
-        );
-    }
-    
-    // Add experience
-    if (data.experience && data.experience.length > 0) {
-        content.push(
-            new Paragraph({
-                text: 'Experience',
-                heading: HeadingLevel.HEADING_2
-            })
-        );
-        
-        data.experience.forEach(exp => {
-            content.push(
-                new Paragraph({
-                    text: exp.jobTitle,
-                    bold: true
-                }),
-                new Paragraph({
-                    text: `${exp.company}${exp.location ? ' | ' + exp.location : ''}`
-                }),
-                new Paragraph({
-                    text: `${formatDate(exp.startDate)} - ${exp.current ? 'Present' : formatDate(exp.endDate)}`
-                })
-            );
-            
-            if (exp.achievements && exp.achievements.length > 0) {
-                exp.achievements.forEach(achievement => {
-                    content.push(
-                        new Paragraph({
-                            text: achievement,
-                            bullet: {
-                                level: 0
-                            }
-                        })
-                    );
-                });
-            }
-            
-            // Add spacing after each experience
-            content.push(new Paragraph({}));
-        });
-    }
-    
-    // Add education
-    if (data.education && data.education.length > 0) {
-        content.push(
-            new Paragraph({
-                text: 'Education',
-                heading: HeadingLevel.HEADING_2
-            })
-        );
-        
-        data.education.forEach(edu => {
-            content.push(
-                new Paragraph({
-                    text: `${edu.degree}${edu.fieldOfStudy ? ' in ' + edu.fieldOfStudy : ''}`,
-                    bold: true
-                }),
-                new Paragraph({
-                    text: `${edu.institution}${edu.location ? ' | ' + edu.location : ''}`
-                }),
-                new Paragraph({
-                    text: `${formatDate(edu.startDate)} - ${edu.current ? 'Present' : formatDate(edu.endDate)}`
-                })
-            );
-            
-            // Add spacing after each education
-            content.push(new Paragraph({}));
-        });
-    }
-    
-    // Add skills
-    if (data.skills && data.skills.length > 0) {
-        content.push(
-            new Paragraph({
-                text: 'Skills',
-                heading: HeadingLevel.HEADING_2
-            })
-        );
-        
-        data.skills.forEach(category => {
-            content.push(
-                new Paragraph({
-                    text: category.name,
-                    bold: true
-                }),
-                new Paragraph({
-                    text: category.skills.join(', ')
-                })
-            );
-        });
-    }
-    
-    return content;
 }
 
 /**

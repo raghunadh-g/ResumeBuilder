@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS-Friendly Resume Builder</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/templates.css">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx@8.0.0/build/index.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Resume<span>Builder</span></h1>
+            </div>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#" data-section="editor" class="active">Editor</a></li>
+                    <li><a href="#" data-section="templates">Templates</a></li>
+                    <li><a href="#" data-section="analyzer">ATS Analyzer</a></li>
+                    <li><a href="#" data-section="tips">ATS Tips</a></li>
+                    <li><a href="#" data-section="about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Editor Section -->
+        <section id="editor" class="active">
+            <div class="container">
+                <h2>Resume Editor</h2>
+                <p>Create your professional resume with our easy-to-use editor. Fill in your details and see the preview update in real-time.</p>
+                
+                <div class="editor-container">
+                    <!-- Sidebar -->
+                    <div class="sidebar">
+                        <div class="sidebar-header">
+                            <h2>Sections</h2>
+                        </div>
+                        <ul class="section-tabs">
+                            <li data-section="personal" class="active">
+                                <i class="fas fa-user"></i> Personal Details
+                            </li>
+                            <li data-section="summary">
+                                <i class="fas fa-file-alt"></i> Professional Summary
+                            </li>
+                            <li data-section="experience">
+                                <i class="fas fa-briefcase"></i> Work Experience
+                            </li>
+                            <li data-section="education">
+                                <i class="fas fa-graduation-cap"></i> Education
+                            </li>
+                            <li data-section="skills">
+                                <i class="fas fa-tools"></i> Skills
+                            </li>
+                            <li data-section="certifications">
+                                <i class="fas fa-certificate"></i> Certifications
+                            </li>
+                            <li data-section="projects">
+                                <i class="fas fa-project-diagram"></i> Projects
+                            </li>
+                            <li data-section="languages">
+                                <i class="fas fa-language"></i> Languages
+                            </li>
+                            <li data-section="interests">
+                                <i class="fas fa-heart"></i> Interests
+                            </li>
+                            <li data-section="references">
+                                <i class="fas fa-users"></i> References
+                            </li>
+                        </ul>
+                        <div class="sidebar-footer">
+                            <button id="btn-template" class="btn btn-secondary">
+                                <i class="fas fa-palette"></i> Change Template
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Area -->
+                    <div class="content-area">
+                        <!-- Personal Details Section -->
+                        <div id="personal-content" class="section-content active">
+                            <h3>Personal Details</h3>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" placeholder="e.g. John">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" name="lastName" placeholder="e.g. Doe">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="professionalTitle">Professional Title</label>
+                                        <input type="text" id="professionalTitle" name="professionalTitle" placeholder="e.g. Software Engineer">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" placeholder="e.g. john.doe@example.com">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="e.g. (555) 123-4567">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="city">City</label>
+                                        <input type="text" id="city" name="city" placeholder="e.g. New York">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="state">State</label>
+                                        <input type="text" id="state" name="state" placeholder="e.g. NY">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="linkedin">LinkedIn</label>
+                                        <input type="url" id="linkedin" name="linkedin" placeholder="e.g. linkedin.com/in/johndoe">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="website">Website</label>
+                                        <input type="url" id="website" name="website" placeholder="e.g. johndoe.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Professional Summary Section -->
+                        <div id="summary-content" class="section-content">
+                            <h3>Professional Summary</h3>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="form-field full-width">
+                                        <label for="summary">Summary</label>
+                                        <textarea id="summary" name="summary" rows="6" placeholder="Write a brief summary of your professional background and key qualifications..."></textarea>
+                                        <div class="form-help">
+                                            <p>A strong professional summary should be 3-5 sentences highlighting your experience, skills, and achievements.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Work Experience Section -->
+                        <div id="experience-content" class="section-content">
+                            <h3>Work Experience</h3>
+                            <div id="experience-items">
+                                <!-- Experience items will be added here -->
+                            </div>
+                            <button type="button" id="add-experience" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Experience
+                            </button>
+                        </div>
+                        
+                        <!-- Education Section -->
+                        <div id="education-content" class="section-content">
+                            <h3>Education</h3>
+                            <div id="education-items">
+                                <!-- Education items will be added here -->
+                            </div>
+                            <button type="button" id="add-education" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Education
+                            </button>
+                        </div>
+                        
+                        <!-- Skills Section -->
+                        <div id="skills-content" class="section-content">
+                            <h3>Skills</h3>
+                            <div id="skill-categories">
+                                <!-- Skill categories will be added here -->
+                            </div>
+                            <button type="button" id="add-skill-category" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Skill Category
+                            </button>
+                        </div>
+                        
+                        <!-- Certifications Section -->
+                        <div id="certifications-content" class="section-content">
+                            <h3>Certifications</h3>
+                            <div id="certification-items">
+                                <!-- Certification items will be added here -->
+                            </div>
+                            <button type="button" id="add-certification" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Certification
+                            </button>
+                        </div>
+                        
+                        <!-- Projects Section -->
+                        <div id="projects-content" class="section-content">
+                            <h3>Projects</h3>
+                            <div id="project-items">
+                                <!-- Project items will be added here -->
+                            </div>
+                            <button type="button" id="add-project" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Project
+                            </button>
+                        </div>
+                        
+                        <!-- Languages Section -->
+                        <div id="languages-content" class="section-content">
+                            <h3>Languages</h3>
+                            <div id="language-items">
+                                <!-- Language items will be added here -->
+                            </div>
+                            <button type="button" id="add-language" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Language
+                            </button>
+                        </div>
+                        
+                        <!-- Interests Section -->
+                        <div id="interests-content" class="section-content">
+                            <h3>Interests</h3>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="form-field full-width">
+                                        <label for="interests">Interests</label>
+                                        <input type="text" id="interests" name="interests" placeholder="e.g. Photography, Hiking, Reading">
+                                        <div class="form-help">
+                                            <p>Separate interests with commas</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- References Section -->
+                        <div id="references-content" class="section-content">
+                            <h3>References</h3>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="form-field full-width">
+                                        <div class="checkbox-field">
+                                            <input type="checkbox" id="referencesAvailable" name="referencesAvailable">
+                                            <label for="referencesAvailable">References available upon request</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="reference-items">
+                                <!-- Reference items will be added here -->
+                            </div>
+                            <button type="button" id="add-reference" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Reference
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Preview Container -->
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <h2>Preview</h2>
+                        <div class="preview-actions">
+                            <button id="btn-export-pdf" class="btn btn-primary">
+                                <i class="fas fa-file-pdf"></i> Export to PDF
+                            </button>
+                            <button id="btn-export-docx" class="btn btn-secondary">
+                                <i class="fas fa-file-word"></i> Export to DOCX
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-frame">
+                        <iframe id="resume-preview"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Templates Section -->
+        <section id="templates">
+            <div class="container">
+                <h2>Resume Templates</h2>
+                <p>Choose from our collection of ATS-friendly resume templates designed to help you stand out while ensuring your resume gets past applicant tracking systems.</p>
+                
+                <div class="template-categories">
+                    <button class="category-btn active" data-category="all">All Templates</button>
+                    <button class="category-btn" data-category="professional">Professional</button>
+                    <button class="category-btn" data-category="modern">Modern</button>
+                    <button class="category-btn" data-category="creative">Creative</button>
+                </div>
+                
+                <div class="templates-grid">
+                    <!-- Professional Templates -->
+                    <div class="template-card" data-category="professional">
+                        <div class="template-preview">
+                            <img src="img/templates/professional-classic.png" alt="Professional Classic Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Professional Classic</h3>
+                            <p>Traditional layout with clean typography and formal structure.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="professional-classic">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="professional-classic">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="professional">
+                        <div class="template-preview">
+                            <img src="img/templates/professional-executive.png" alt="Professional Executive Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Professional Executive</h3>
+                            <p>Sophisticated design for senior positions with emphasis on achievements.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="professional-executive">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="professional-executive">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="professional">
+                        <div class="template-preview">
+                            <img src="img/templates/professional-corporate.png" alt="Professional Corporate Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Professional Corporate</h3>
+                            <p>Structured layout with subtle color accents for corporate environments.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="professional-corporate">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="professional-corporate">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modern Templates -->
+                    <div class="template-card" data-category="modern">
+                        <div class="template-preview">
+                            <img src="img/templates/modern-clean.png" alt="Modern Clean Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Modern Clean</h3>
+                            <p>Minimalist design with ample white space and contemporary typography.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="modern-clean">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="modern-clean">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="modern">
+                        <div class="template-preview">
+                            <img src="img/templates/modern-sidebar.png" alt="Modern Sidebar Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Modern Sidebar</h3>
+                            <p>Contemporary layout with a functional sidebar for skills and contact info.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="modern-sidebar">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="modern-sidebar">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="modern">
+                        <div class="template-preview">
+                            <img src="img/templates/modern-tech.png" alt="Modern Tech Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Modern Tech</h3>
+                            <p>Clean design with skill visualizations ideal for tech professionals.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="modern-tech">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="modern-tech">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Creative Templates -->
+                    <div class="template-card" data-category="creative">
+                        <div class="template-preview">
+                            <img src="img/templates/creative-designer.png" alt="Creative Designer Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Creative Designer</h3>
+                            <p>Visually striking layout for design professionals with portfolio highlights.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="creative-designer">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="creative-designer">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="creative">
+                        <div class="template-preview">
+                            <img src="img/templates/creative-colorful.png" alt="Creative Colorful Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Creative Colorful</h3>
+                            <p>Bold, colorful design that stands out while maintaining professional structure.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="creative-colorful">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="creative-colorful">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card" data-category="creative">
+                        <div class="template-preview">
+                            <img src="img/templates/creative-minimal.png" alt="Creative Minimal Template">
+                        </div>
+                        <div class="template-info">
+                            <h3>Creative Minimal</h3>
+                            <p>Artistic minimalist design with unique layout for creative professionals.</p>
+                            <div class="template-actions">
+                                <button class="btn btn-primary btn-select-template" data-template="creative-minimal">Select</button>
+                                <button class="btn btn-secondary btn-preview-template" data-template="creative-minimal">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ATS Analyzer Section -->
+        <section id="analyzer">
+            <div class="container">
+                <h2>ATS Resume Analyzer</h2>
+                <p>Optimize your resume for specific job descriptions. Paste a job description below to analyze how well your resume matches the requirements.</p>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-field full-width">
+                            <label for="job-description">Job Description</label>
+                            <textarea id="job-description" rows="10" placeholder="Paste the job description here..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button id="analyze-job-description" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Analyze
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="analysis-results" style="display: none;">
+                    <!-- Analysis results will be displayed here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- ATS Tips Section -->
+        <section id="tips">
+            <div class="container">
+                <h2>ATS Optimization Tips</h2>
+                <p>Learn how to optimize your resume to pass through Applicant Tracking Systems (ATS) and increase your chances of landing an interview.</p>
+                
+                <div class="tips-container">
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Formatting Tips</h3>
+                        <ul>
+                            <li>Use standard section headings (e.g., "Work Experience", "Education")</li>
+                            <li>Avoid tables, text boxes, headers, footers, and columns</li>
+                            <li>Use standard fonts like Arial, Calibri, or Times New Roman</li>
+                            <li>Save your resume as a .docx or .pdf file</li>
+                            <li>Keep formatting simple with minimal styling</li>
+                            <li>Use standard bullet points (•) rather than custom symbols</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Keyword Optimization</h3>
+                        <ul>
+                            <li>Include relevant keywords from the job description</li>
+                            <li>Use both acronyms and spelled-out terms (e.g., "ATS" and "Applicant Tracking System")</li>
+                            <li>Place important keywords in context, not just in a list</li>
+                            <li>Include industry-specific terminology</li>
+                            <li>Match the exact phrasing used in the job description</li>
+                            <li>Avoid keyword stuffing which can trigger spam filters</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h3>Content Structure</h3>
+                        <ul>
+                            <li>Use reverse chronological order for work experience</li>
+                            <li>Quantify achievements with numbers and percentages</li>
+                            <li>Use action verbs to start bullet points</li>
+                            <li>Keep bullet points concise (1-2 lines each)</li>
+                            <li>Include dates for all experiences and education</li>
+                            <li>Focus on relevant experience and skills for the position</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>ATS Compliance</h3>
+                        <ul>
+                            <li>Avoid images, graphics, and icons</li>
+                            <li>Don't use creative section headings</li>
+                            <li>Avoid special characters and accented letters</li>
+                            <li>Don't include information in the header or footer</li>
+                            <li>Use a single-column layout for better parsing</li>
+                            <li>Test your resume with an ATS simulator before applying</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Skills Optimization</h3>
+                        <ul>
+                            <li>Include a dedicated skills section</li>
+                            <li>Categorize skills by type (technical, soft, etc.)</li>
+                            <li>Match skills mentioned in the job description</li>
+                            <li>Include proficiency levels for technical skills</li>
+                            <li>Incorporate skills naturally throughout your experience</li>
+                            <li>Remove outdated or irrelevant skills</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <h3>Customization</h3>
+                        <ul>
+                            <li>Tailor your resume for each job application</li>
+                            <li>Adjust your professional summary for each role</li>
+                            <li>Highlight relevant experience based on the job description</li>
+                            <li>Rearrange sections to prioritize relevant information</li>
+                            <li>Use the same job title terminology as the listing</li>
+                            <li>Include company-specific keywords when applicable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2>About Resume Builder</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Resume Builder is a powerful tool designed to help job seekers create professional, ATS-friendly resumes that stand out to both hiring managers and applicant tracking systems.</p>
+                        
+                        <h3>Why Use Resume Builder?</h3>
+                        <p>In today's competitive job market, having a resume that can pass through Applicant Tracking Systems (ATS) is crucial. Our Resume Builder is specifically designed to create resumes that are:</p>
+                        <ul>
+                            <li><strong>ATS-Optimized:</strong> Properly formatted to ensure your resume gets past automated screening systems</li>
+                            <li><strong>Professional:</strong> Clean, modern designs that impress hiring managers</li>
+                            <li><strong>Customizable:</strong> Multiple templates and sections to showcase your unique skills and experience</li>
+                            <li><strong>Data-Driven:</strong> Smart suggestions and job description analysis to optimize your content</li>
+                        </ul>
+                        
+                        <h3>Features</h3>
+                        <ul>
+                            <li><strong>Multiple ATS-Friendly Templates:</strong> Choose from professional, modern, and creative designs</li>
+                            <li><strong>Job Description Analyzer:</strong> Match your resume against specific job descriptions</li>
+                            <li><strong>Smart Content Suggestions:</strong> Get recommendations for action verbs and bullet points</li>
+                            <li><strong>Export Options:</strong> Download your resume as PDF or DOCX</li>
+                            <li><strong>Real-Time Preview:</strong> See changes to your resume as you make them</li>
+                            <li><strong>ATS Optimization Tips:</strong> Learn best practices for creating ATS-friendly resumes</li>
+                        </ul>
+                        
+                        <h3>Privacy & Data Security</h3>
+                        <p>Your privacy is important to us. All resume data is stored locally in your browser and is never sent to our servers. Your information remains completely private and secure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Resume Builder. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Template Modal -->
+    <div id="template-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select a Template</h2>
+            <div class="template-selection">
+                <!-- Template selection content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/templates.js" type="module"></script>
+    <script src="js/analyzer.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>

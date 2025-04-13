@@ -1,0 +1,797 @@
+/**
+ * Resume Builder - Templates Styles
+ * Styles for the different resume templates
+ */
+
+/* ===== Base Resume Template Styles ===== */
+.resume-template {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.resume-template .header {
+    margin-bottom: 20px;
+}
+
+.resume-template .name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.resume-template .title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.resume-template .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.resume-template .contact-item {
+    display: flex;
+    align-items: center;
+}
+
+.resume-template .contact-item i {
+    margin-right: 5px;
+    color: #666;
+}
+
+.resume-template .section {
+    margin-bottom: 20px;
+}
+
+.resume-template .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.resume-template .item {
+    margin-bottom: 15px;
+}
+
+.resume-template .item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.resume-template .item-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #444;
+}
+
+.resume-template .item-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+.resume-template .item-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.resume-template .item-content {
+    font-size: 14px;
+    color: #555;
+}
+
+.resume-template .item-content ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.resume-template .item-content li {
+    margin-bottom: 5px;
+}
+
+.resume-template .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.resume-template .skill-item {
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* ===== Professional Templates ===== */
+
+/* Professional Classic */
+.professional-classic {
+    font-family: 'Times New Roman', Times, serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.professional-classic .header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.professional-classic .name {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.professional-classic .title {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.professional-classic .contact-info {
+    justify-content: center;
+}
+
+.professional-classic .section-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 2px solid #333;
+}
+
+.professional-classic .item-title {
+    font-weight: 700;
+}
+
+.professional-classic .item-content ul {
+    list-style-type: square;
+}
+
+/* Professional Executive */
+.professional-executive {
+    font-family: 'Georgia', serif;
+    color: #222;
+    line-height: 1.6;
+}
+
+.professional-executive .header {
+    border-bottom: 3px double #444;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.professional-executive .name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.professional-executive .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
+.professional-executive .contact-info {
+    margin-top: 10px;
+}
+
+.professional-executive .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    border-bottom: 2px solid #444;
+    padding-bottom: 8px;
+}
+
+.professional-executive .item-title {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.professional-executive .item-subtitle {
+    font-style: italic;
+}
+
+.professional-executive .item-content ul {
+    list-style-type: disc;
+}
+
+/* Professional Corporate */
+.professional-corporate {
+    font-family: 'Calibri', 'Segoe UI', sans-serif;
+    color: #333;
+    line-height: 1.5;
+}
+
+.professional-corporate .header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-left: 5px solid #2c5282;
+    margin-bottom: 25px;
+}
+
+.professional-corporate .name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c5282;
+}
+
+.professional-corporate .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+}
+
+.professional-corporate .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c5282;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.professional-corporate .item-title {
+    font-weight: 700;
+    color: #2c5282;
+}
+
+.professional-corporate .item-content ul {
+    list-style-type: circle;
+}
+
+.professional-corporate .skill-item {
+    background-color: #f0f5ff;
+    border: 1px solid #d0e0ff;
+}
+
+/* ===== Modern Templates ===== */
+
+/* Modern Clean */
+.modern-clean {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.modern-clean .header {
+    margin-bottom: 30px;
+}
+
+.modern-clean .name {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #222;
+}
+
+.modern-clean .title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+.modern-clean .contact-info {
+    margin-top: 15px;
+}
+
+.modern-clean .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #222;
+    border-bottom: none;
+    margin-bottom: 15px;
+}
+
+.modern-clean .item-title {
+    font-weight: 500;
+}
+
+.modern-clean .item-subtitle {
+    font-weight: 400;
+}
+
+.modern-clean .item-content ul {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+.modern-clean .item-content li::before {
+    content: "•";
+    color: #999;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.modern-clean .skill-item {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+/* Modern Sidebar */
+.modern-sidebar {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 30px;
+}
+
+.modern-sidebar .header,
+.modern-sidebar .section.skills,
+.modern-sidebar .section.languages,
+.modern-sidebar .section.interests {
+    grid-column: 1;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.modern-sidebar .section:not(.skills):not(.languages):not(.interests) {
+    grid-column: 2;
+}
+
+.modern-sidebar .header {
+    text-align: center;
+}
+
+.modern-sidebar .name {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.modern-sidebar .title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.modern-sidebar .contact-info {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modern-sidebar .section-title {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ddd;
+}
+
+.modern-sidebar .skill-item {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modern-sidebar .skill-item::after {
+    content: "";
+    height: 5px;
+    background-color: #ddd;
+    border-radius: 2px;
+    margin-top: 5px;
+}
+
+/* Modern Tech */
+.modern-tech {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.modern-tech .header {
+    background-color: #2d3748;
+    color: white;
+    padding: 30px;
+    margin: -30px -30px 30px -30px;
+}
+
+.modern-tech .name {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+}
+
+.modern-tech .title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #cbd5e0;
+}
+
+.modern-tech .contact-info {
+    margin-top: 15px;
+    color: #cbd5e0;
+}
+
+.modern-tech .contact-item i {
+    color: #90cdf4;
+}
+
+.modern-tech .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3748;
+    border-bottom: 2px solid #90cdf4;
+    padding-bottom: 8px;
+}
+
+.modern-tech .item-title {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.modern-tech .item-subtitle {
+    color: #4a5568;
+}
+
+.modern-tech .item-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.modern-tech .item-content li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.modern-tech .item-content li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #90cdf4;
+    font-weight: bold;
+}
+
+.modern-tech .skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.modern-tech .skill-item {
+    background-color: #edf2f7;
+    border-left: 3px solid #90cdf4;
+    padding: 8px 12px;
+    border-radius: 0 3px 3px 0;
+}
+
+/* ===== Creative Templates ===== */
+
+/* Creative Designer */
+.creative-designer {
+    font-family: 'Montserrat', 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.creative-designer .header {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #f0f0f0;
+}
+
+.creative-designer .header::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: #ff6b6b;
+}
+
+.creative-designer .name {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #333;
+}
+
+.creative-designer .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ff6b6b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.creative-designer .contact-info {
+    margin-top: 15px;
+}
+
+.creative-designer .contact-item i {
+    color: #ff6b6b;
+}
+
+.creative-designer .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333;
+    border-bottom: none;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.creative-designer .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #ff6b6b;
+}
+
+.creative-designer .item-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.creative-designer .item-subtitle {
+    font-weight: 500;
+    color: #666;
+}
+
+.creative-designer .item-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.creative-designer .item-content li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.creative-designer .item-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #ff6b6b;
+}
+
+.creative-designer .skill-item {
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    padding: 8px 15px;
+}
+
+/* Creative Colorful */
+.creative-colorful {
+    font-family: 'Poppins', 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.creative-colorful .header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #6a11cb;
+}
+
+.creative-colorful .name {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.creative-colorful .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #6a11cb;
+}
+
+.creative-colorful .contact-info {
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.creative-colorful .contact-item i {
+    color: #6a11cb;
+}
+
+.creative-colorful .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #6a11cb;
+    border-bottom: none;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.creative-colorful .section {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.creative-colorful .item-title {
+    font-weight: 600;
+    color: #6a11cb;
+}
+
+.creative-colorful .item-subtitle {
+    color: #555;
+}
+
+.creative-colorful .item-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.creative-colorful .item-content li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+}
+
+.creative-colorful .item-content li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #6a11cb;
+    font-weight: bold;
+}
+
+.creative-colorful .skills-list {
+    justify-content: center;
+}
+
+.creative-colorful .skill-item {
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 8px 15px;
+}
+
+/* Creative Minimal */
+.creative-minimal {
+    font-family: 'Raleway', 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.creative-minimal .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.creative-minimal .header-left {
+    flex: 1;
+}
+
+.creative-minimal .header-right {
+    text-align: right;
+}
+
+.creative-minimal .name {
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.creative-minimal .title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+.creative-minimal .contact-info {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.creative-minimal .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #999;
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.creative-minimal .item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+.creative-minimal .item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.creative-minimal .item-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #222;
+}
+
+.creative-minimal .item-subtitle {
+    font-weight: 400;
+    color: #777;
+}
+
+.creative-minimal .item-content {
+    margin-top: 10px;
+    color: #666;
+}
+
+.creative-minimal .item-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.creative-minimal .item-content li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.creative-minimal .item-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #ccc;
+}
+
+.creative-minimal .skill-item {
+    background-color: transparent;
+    border: 1px solid #eee;
+    border-radius: 0;
+    padding: 8px 15px;
+}

@@ -190,10 +190,16 @@ function setupFormInteractions() {
     
     // Set up event delegation for remove buttons
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('btn-remove')) {
+        // Check if the click was on the remove button or its icon
+        if (e.target && (e.target.classList.contains('btn-remove') || e.target.closest('.btn-remove'))) {
+            // Find the closest parent item
             const item = e.target.closest('.experience-item, .education-item, .skill-category, .certification-item, .project-item, .language-item, .reference-item, .achievement-item, .skill-item');
-            if (item) {
+            
+            if (item) {    
+                // Remove the item
                 item.remove();
+                
+                // Update the preview
                 updateResumePreview();
             }
         }

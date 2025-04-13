@@ -44,7 +44,7 @@ function addExperienceItem() {
                 </div>
                 <div class="form-field">
                     <label for="${itemId}-company">Company</label>
-                    <input type="text" id="${itemId}-company" name="company" placeholder="e.g. Acme Inc.">
+                    <input type="text" id="${itemId}-company" name="company" placeholder="e.g. Amazon Inc.">
                 </div>
             </div>
             <div class="form-row">

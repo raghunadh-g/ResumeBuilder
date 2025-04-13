@@ -498,6 +498,8 @@ textarea:focus {
     width: 100%;
     height: 100%;
     border: none;
+    overflow-y: auto;
+    display: block; /* Ensures the iframe behaves as a block element */
 }
 
 /* ===== Templates Section ===== */

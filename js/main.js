@@ -268,6 +268,15 @@ function setupTemplateSelection() {
             document.querySelector('nav a[data-section="editor"]').click();
         });
     });
+    
+    // Template preview buttons
+    const previewButtons = document.querySelectorAll('.btn-preview-template');
+    previewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const templateId = this.getAttribute('data-template');
+            previewTemplate(templateId);
+        });
+    });
 }
 
 /**
@@ -294,6 +303,83 @@ function selectTemplate(template) {
     
     // Update the preview
     updateResumePreview();
+}
+
+/**
+ * Preview a template in a new window
+ */
+function previewTemplate(templateId) {
+    // Import the necessary functions
+    import('./templates.js').then(({ generateTemplateHTML }) => {
+        import('./preview.js').then(({ collectResumeData }) => {
+            // Get the resume data
+            const resumeData = collectResumeData();
+            
+            // Generate HTML for the selected template
+            const templateHTML = generateTemplateHTML(templateId, resumeData);
+            
+            // Create a new window for the preview
+            const previewWindow = window.open('', '_blank');
+            if (previewWindow) {
+                // Create the HTML content
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Template Preview - ${templateId}</title>
+                        
+                        <!-- Google Fonts -->
+                        <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+                        
+                        <!-- Custom CSS -->
+                        <link rel="stylesheet" href="css/templates.css">
+                        
+                        <style>
+                            body {
+                                margin: 0;
+                                padding: 20px;
+                                font-family: 'Open Sans', sans-serif;
+                                background-color: #f5f5f5;
+                            }
+                            
+                            .resume-container {
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+                                padding: 20px;
+                                box-sizing: border-box;
+                            }
+                            
+                            .resume-template {
+                                background-color: #fff;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                                width: 100%;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                padding: 40px;
+                                box-sizing: border-box;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="resume-container">
+                            ${templateHTML}
+                        </div>
+                    </body>
+                    </html>
+                `;
+                
+                // Write the content to the new window
+                previewWindow.document.open();
+                previewWindow.document.write(htmlContent);
+                previewWindow.document.close();
+            }
+        });
+    });
 }
 
 /**

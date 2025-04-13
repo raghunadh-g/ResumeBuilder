@@ -41,6 +41,9 @@ function initApp() {
     
     // Set up section tabs
     setupSectionTabs();
+
+    // Set up change template
+    setupChangeTemplate();
     
     // Set up form interactions
     setupFormInteractions();
@@ -105,6 +108,21 @@ function setupSectionTabs() {
             // Show corresponding content section
             const sectionId = this.getAttribute('data-section');
             document.getElementById(`${sectionId}-content`).classList.add('active');
+        });
+    });
+}
+
+
+/**
+ * Set up tabs for resume sections in the sidebar
+ */
+function setupChangeTemplate() {
+    const sidebarButtons = document.querySelectorAll('.sidebar-footer button');
+    
+    sidebarButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Switch to templates section
+            document.querySelector('nav a[data-section="templates"]').click();
         });
     });
 }

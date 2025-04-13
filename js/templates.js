@@ -337,7 +337,44 @@ function formatDate(dateString) {
 
 // Template-specific HTML generators
 const templateGenerators = {
-    // Add template-specific generators here if needed
+    'modern-sidebar': function(data, template) {
+        return `
+            <div class="resume-template ${template.className}">
+                <div class="modern-sidebar-left">
+                    <div class="header">
+                        <div class="name">${data.firstName || ''} ${data.lastName || ''}</div>
+                        <div class="title">${data.professionalTitle || ''}</div>
+                        <div class="contact-info">
+                            ${data.email ? `<div class="contact-item"><i class="fas fa-envelope"></i> ${data.email}</div>` : ''}
+                            ${data.phone ? `<div class="contact-item"><i class="fas fa-phone"></i> ${data.phone}</div>` : ''}
+                            ${data.city ? `<div class="contact-item"><i class="fas fa-map-marker-alt"></i> ${data.city}${data.state ? ', ' + data.state : ''}</div>` : ''}
+                            ${data.linkedin ? `<div class="contact-item"><i class="fab fa-linkedin"></i> ${data.linkedin}</div>` : ''}
+                            ${data.website ? `<div class="contact-item"><i class="fas fa-globe"></i> ${data.website}</div>` : ''}
+                        </div>
+                    </div>
+                    
+                    ${generateSkillsSection(data.skills)}
+                    ${generateLanguagesSection(data.languages)}
+                    ${generateInterestsSection(data.interests)}
+                </div>
+                
+                <div class="modern-sidebar-right">
+                    ${data.summary ? `
+                        <div class="section">
+                            <div class="section-title">Professional Summary</div>
+                            <div class="item-content">${data.summary}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${generateExperienceSection(data.experience)}
+                    ${generateEducationSection(data.education)}
+                    ${generateProjectsSection(data.projects)}
+                    ${generateCertificationsSection(data.certifications)}
+                    ${generateReferencesSection(data.references, data.referencesAvailable)}
+                </div>
+            </div>
+        `;
+    }
 };
 
 // Export functions
